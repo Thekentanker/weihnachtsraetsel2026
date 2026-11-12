@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Codeprüfung</title>
+<title>Weihnachtsrätsel 2026</title>
 
 <style>
 
@@ -15,108 +15,380 @@
 }
 
 body{
-    background:#121212;
-    color:white;
-    font-family:Segoe UI, Arial, sans-serif;
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+
+    background:
+        radial-gradient(circle at top, #3b0000 0%, #190000 40%, #0b0b0b 100%);
+
+    color:white;
+    font-family:Segoe UI, Arial, sans-serif;
     padding:20px;
 }
 
 .container{
     width:100%;
-    max-width:500px;
-    background:#1f1f1f;
-    padding:35px;
-    border-radius:20px;
-    box-shadow:0 0 30px rgba(0,0,0,0.4);
+    max-width:600px;
+
+    background:rgba(255,255,255,0.06);
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    backdrop-filter:blur(8px);
+
+    border-radius:25px;
+    padding:40px;
+
     text-align:center;
+
+    box-shadow:
+        0 0 50px rgba(0,0,0,.5),
+        0 0 20px rgba(255,215,0,.15);
 }
 
 h1{
     margin-bottom:10px;
+    color:#ffd700;
 }
 
-.info{
-    color:#cccccc;
-    margin-bottom:25px;
+.subtitle{
+    color:#d0d0d0;
+    margin-bottom:30px;
 }
 
 .code-container{
     display:flex;
     justify-content:center;
     gap:12px;
+
     margin-bottom:25px;
 }
 
 .digit{
-    width:70px;
-    height:70px;
-    font-size:2rem;
-    text-align:center;
+    width:80px;
+    height:80px;
+
     border:none;
-    border-radius:12px;
-    background:#2b2b2b;
-    color:white;
+    border-radius:15px;
+
+    text-align:center;
+
+    font-size:2.2rem;
+    font-weight:bold;
+
+    background:#1f1f1f;
+    color:#ffd700;
 }
 
 .digit:focus{
-    outline:3px solid #4da6ff;
+    outline:none;
+
+    box-shadow:
+        0 0 0 3px #ffd700,
+        0 0 20px rgba(255,215,0,.5);
 }
 
 #checkValue{
     width:100%;
-    padding:14px;
+
+    padding:15px;
+
     border:none;
-    border-radius:12px;
-    margin-bottom:20px;
-    background:#2b2b2b;
+    border-radius:15px;
+
+    background:#1f1f1f;
     color:white;
+
     font-size:1rem;
 }
 
-button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    background:#4da6ff;
-    color:white;
-    cursor:pointer;
-    font-size:1rem;
-    font-weight:bold;
-}
+#checkValue:focus{
+    outline:none;
 
-button:hover{
-    background:#348ff0;
+    box-shadow:
+        0 0 0 3px #ffd700,
+        0 0 20px rgba(255,215,0,.5);
 }
 
 #result{
     margin-top:25px;
-    padding:15px;
-    border-radius:12px;
-    min-height:60px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    font-weight:bold;
 }
 
-.success{
-    background:#145c22;
-    color:#aef5a6;
+.success-card{
+
+    background:#123018;
+    border:2px solid #22aa44;
+
+    color:#d2ffd2;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    animation: pop .4s;
 }
 
-.error{
-    background:#641414;
-    color:#ffb3b3;
+.error-card{
+
+    background:#401515;
+    border:2px solid #aa3333;
+
+    color:#ffd2d2;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    animation: pop .4s;
+}
+
+@keyframes pop{
+
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
+
+.success-title{
+    font-size:1.5rem;
+    margin-bottom:10px;
 }
 
 </style>
 </head>
 <body>
 
-<div class="
+<div class="container">
+
+    <h1>🎄 Weihnachtsrätsel 2026</h1>
+
+    <div class="subtitle">
+        Gib den dreistelligen Code und den Prüfwert ein.
+    </div>
+
+    <div class="code-container">
+
+        <input
+            id="digit1"
+            class="digit"
+            maxlength="1"
+            inputmode="numeric">
+
+        <input
+            id="digit2"
+            class="digit"
+            maxlength="1"
+            inputmode="numeric">
+
+        <input
+            id="digit3"
+            class="digit"
+            maxlength="1"
+            inputmode="numeric">
+
+    </div>
+
+    <input
+        id="checkValue"
+        type="text"
+        placeholder="Prüfwert">
+
+    <div id="result"></div>
+
+</div>
+
+<!-- FANFARE -->
+<audio id="fanfare">
+    <!-- sounds/fanfare.mp3 -->
+</audio>
+
+<script>
+
+/*
+--------------------------------
+RÄTSEL
+--------------------------------
+*/
+
+const raetsel = {
+
+    "123": {
+        pruefwert: "ABC",
+        erfolg:
+            "🎉 Platzhalter für Rätsel 1"
+    },
+
+    "456": {
+        pruefwert: "DEF",
+        erfolg:
+            "🎉 Platzhalter für Rätsel 2"
+    }
+
+};
+
+
+/*
+--------------------------------
+AUTOMATISCHER CURSOR
+--------------------------------
+*/
+
+const digits =
+    document.querySelectorAll(".digit");
+
+digits.forEach((input,index,inputs)=>{
+
+    input.addEventListener("input",()=>{
+
+        input.value =
+            input.value.replace(/\D/g,'');
+
+        if(
+            input.value &&
+            index < inputs.length-1
+        ){
+            inputs[index+1].focus();
+        }
+
+        pruefungVersuchen();
+    });
+
+    input.addEventListener("keydown",(e)=>{
+
+        if(
+            e.key==="Backspace" &&
+            input.value==="" &&
+            index>0
+        ){
+            inputs[index-1].focus();
+        }
+
+    });
+
+});
+
+/*
+--------------------------------
+PRÜFWERT
+--------------------------------
+*/
+
+document
+.getElementById("checkValue")
+.addEventListener("input",pruefungVersuchen);
+
+
+/*
+--------------------------------
+AUTOMATISCHE PRÜFUNG
+--------------------------------
+*/
+
+function pruefungVersuchen(){
+
+    const code =
+        digit1.value +
+        digit2.value +
+        digit3.value;
+
+    const pruefwert =
+        checkValue.value.trim();
+
+    if(
+        code.length === 3 &&
+        pruefwert.length > 0
+    ){
+        pruefen();
+    }
+
+}
+
+
+/*
+--------------------------------
+VALIDIERUNG
+--------------------------------
+*/
+
+let letzterErfolg = null;
+
+function pruefen(){
+
+    const code =
+        digit1.value +
+        digit2.value +
+        digit3.value;
+
+    const pruefwert =
+        checkValue.value
+            .trim()
+            .toUpperCase();
+
+    const result =
+        document.getElementById("result");
+
+    if(!(code in raetsel)){
+
+        result.innerHTML = `
+            <div class="error-card">
+                ❌ Unbekannter Code
+            </div>
+        `;
+
+        return;
+    }
+
+    if(
+        raetsel[code].pruefwert
+        .toUpperCase() !== pruefwert
+    ){
+
+        result.innerHTML = `
+            <div class="error-card">
+                ❌ Prüfwert stimmt nicht.
+            </div>
+        `;
+
+        return;
+    }
+
+    if(letzterErfolg !== code){
+
+        letzterErfolg = code;
+
+        /*
+        FANFARE
+        document
+            .getElementById("fanfare")
+            .play();
+        */
+    }
+
+    result.innerHTML = `
+        <div class="success-card">
+
+            <div class="success-title">
+                🏆 Erfolg!
+            </div>
+
+            <div>
+                ${raetsel[code].erfolg}
+            </div>
+
+        </div>
+    `;
+}
+
+</script>
+
+</body>
+</html>
