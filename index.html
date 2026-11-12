@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Weihnachtsrätsel 2026</title>
+<title>🎄 Weihnachtsrätsel 2026</title>
 
 <style>
 
@@ -15,112 +15,157 @@
 }
 
 body{
+    font-family: "Segoe UI", sans-serif;
     min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
 
     background:
-        radial-gradient(circle at top, #3b0000 0%, #190000 40%, #0b0b0b 100%);
+    radial-gradient(circle at top,#5b1010 0%,#250808 40%,#0f0505 100%);
 
     color:white;
-    font-family:Segoe UI, Arial, sans-serif;
-    padding:20px;
+    overflow-x:hidden;
 }
 
-.container{
-    width:100%;
-    max-width:650px;
+.snowflake{
+    position:fixed;
+    top:-10px;
+    color:white;
+    opacity:.7;
+    animation:snow linear infinite;
+    pointer-events:none;
+}
 
-    background:rgba(255,255,255,0.06);
+@keyframes snow{
+    from{
+        transform:translateY(-20px);
+    }
+    to{
+        transform:translateY(110vh);
+    }
+}
 
-    border:1px solid rgba(255,255,255,0.1);
-
-    backdrop-filter:blur(8px);
-
-    border-radius:25px;
-
-    padding:40px;
-
+.header{
     text-align:center;
+    padding-top:25px;
+}
+
+.header h1{
+    color:#ffd700;
+    text-shadow:0 0 15px rgba(255,215,0,.5);
+}
+
+.advent{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap:30px;
+    margin-bottom:20px;
+}
+
+.candle{
+    width:30px;
+    height:120px;
+    background:#a40000;
+    border-radius:6px;
+    position:relative;
+}
+
+.flame{
+    position:absolute;
+    width:18px;
+    height:30px;
+    left:6px;
+    top:-28px;
+
+    background:gold;
+    border-radius:50% 50% 50% 50%;
 
     box-shadow:
-        0 0 50px rgba(0,0,0,.5),
-        0 0 20px rgba(255,215,0,.15);
+        0 0 20px gold,
+        0 0 40px orange;
+
+    animation:flicker .4s infinite alternate;
 }
 
-h1{
-    color:#ffd700;
-    margin-bottom:10px;
+@keyframes flicker{
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.1);
+    }
 }
 
-.subtitle{
-    margin-bottom:30px;
-    color:#d6d6d6;
+.content{
+
+    width:min(90%,650px);
+
+    margin:20px auto;
+
+    padding:35px;
+
+    background:rgba(255,255,255,0.08);
+
+    border-radius:30px;
+
+    backdrop-filter:blur(6px);
 }
 
-.label{
+label{
     display:block;
-    margin-bottom:12px;
+    margin-bottom:10px;
     font-weight:bold;
 }
 
 select{
+
     width:100%;
     padding:15px;
-    border:none;
-    border-radius:15px;
 
-    background:#1f1f1f;
+    background:#221414;
     color:white;
 
-    font-size:1rem;
+    border:none;
+    border-radius:12px;
 }
 
-select:focus{
-    outline:none;
-    box-shadow:
-        0 0 0 3px #ffd700;
-}
-
-#codeBereich{
+#codeSection{
     display:none;
     margin-top:30px;
 }
 
-.code-title{
-    margin-bottom:20px;
+.codeTitle{
+    margin-bottom:15px;
+    text-align:center;
 }
 
-.code-container{
+.codeRow{
     display:flex;
     justify-content:center;
-    gap:12px;
+    gap:15px;
     margin-bottom:20px;
 }
 
 .digit{
+
     width:80px;
     height:80px;
+
+    font-size:2rem;
+
+    text-align:center;
 
     border:none;
     border-radius:15px;
 
-    background:#1f1f1f;
-
+    background:#241818;
     color:#ffd700;
-
-    font-size:2rem;
-    font-weight:bold;
-    text-align:center;
 }
 
 .digit:focus{
     outline:none;
-
-    box-shadow:
-        0 0 0 3px #ffd700,
-        0 0 20px rgba(255,215,0,.5);
+    box-shadow:0 0 10px gold;
 }
 
 button{
@@ -132,73 +177,120 @@ button{
     border:none;
     border-radius:15px;
 
+    background:#ffd700;
+
     font-size:1rem;
     font-weight:bold;
 
     cursor:pointer;
-
-    background:#ffd700;
-    color:black;
-
-    transition:0.2s;
 }
 
 button:hover{
-    transform:translateY(-2px);
+
+    background:#ffea7a;
+
 }
 
 #result{
+
     margin-top:25px;
+
 }
 
-.success-card{
+.success{
 
-    background:#123018;
-    border:2px solid #32b552;
+    background:#123b16;
+
+    border:2px solid #2dcc4f;
+
+    padding:20px;
 
     border-radius:15px;
 
-    padding:25px;
-    color:#d8ffd8;
+    animation:grow .4s;
 }
 
-.error-card{
+.error{
 
-    background:#401515;
-    border:2px solid #cf4d4d;
+    background:#4a1515;
+
+    border:2px solid #d45656;
+
+    padding:20px;
 
     border-radius:15px;
-
-    padding:25px;
-
-    color:#ffd2d2;
 }
 
-.success-title{
-    font-size:1.6rem;
-    margin-bottom:10px;
+@keyframes grow{
+
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.cookie{
+    position:fixed;
+    font-size:2rem;
+    opacity:.7;
+}
+
+.cookie.left{
+    left:15px;
+    bottom:15px;
+}
+
+.cookie.right{
+    right:15px;
+    bottom:15px;
 }
 
 </style>
 </head>
 <body>
 
-<div class="container">
+<div id="snow"></div>
 
-    <h1>🎄 Weihnachtsrätsel 2026</h1>
+<div class="cookie left">🍪</div>
+<div class="cookie right">🍪</div>
 
-    <div class="subtitle">
-        Löse die Rätsel und überprüfe deinen Zahlencode.
+<div class="header">
+
+    <div class="advent">
+
+        <div class="candle">
+            <div class="flame"></div>
+        </div>
+
+        <div class="candle">
+            <div class="flame"></div>
+        </div>
+
+        <div class="candle">
+            <div class="flame"></div>
+        </div>
+
     </div>
 
-    <label class="label">
+    <h1>🎄 Weihnachtsrätsel 2026 🎄</h1>
+
+</div>
+
+<div class="content">
+
+    <label>
         Um welches Rätsel handelt es sich?
     </label>
 
-    <select id="raetselAuswahl">
+    <select id="raetsel">
 
         <option value="">
-            -- Bitte auswählen --
+            --
         </option>
 
         <option value="1">
@@ -215,31 +307,17 @@ button:hover{
 
     </select>
 
-    <div id="codeBereich">
+    <div id="codeSection">
 
-        <h3 class="code-title">
+        <h3 class="codeTitle">
             Trage hier deinen Zahlencode ein
         </h3>
 
-        <div class="code-container">
+        <div class="codeRow">
 
-            <input
-                id="digit1"
-                class="digit"
-                maxlength="1"
-                inputmode="numeric">
-
-            <input
-                id="digit2"
-                class="digit"
-                maxlength="1"
-                inputmode="numeric">
-
-            <input
-                id="digit3"
-                class="digit"
-                maxlength="1"
-                inputmode="numeric">
+            <input id="d1" class="digit" maxlength="1" inputmode="numeric">
+            <input id="d2" class="digit" maxlength="1" inputmode="numeric">
+            <input id="d3" class="digit" maxlength="1" inputmode="numeric">
 
         </div>
 
@@ -253,94 +331,53 @@ button:hover{
 
 </div>
 
-<audio id="fanfare" preload="auto">
-    <source src="fanfare.mp3" type="audio/mpeg">
+<audio id="fanfare">
+    <source src="sounds/fanfare.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-const raetsel = {
+const codes = {
 
-    "1": {
-        code: "429",
-        erfolg:
-        "🎉 Herzlichen Glückwunsch! Rätsel 1 wurde erfolgreich gelöst."
-    },
-
-    "2": {
-        code: "923",
-        erfolg:
-        "🎉 Herzlichen Glückwunsch! Rätsel 2 wurde erfolgreich gelöst."
-    },
-
-    "3": {
-        code: "108",
-        erfolg:
-        "🎉 Herzlichen Glückwunsch! Rätsel 3 wurde erfolgreich gelöst."
-    }
+    1 : "429",
+    2 : "923",
+    3 : "108"
 
 };
 
-document
-.getElementById("raetselAuswahl")
-.addEventListener("change", function(){
+document.getElementById("raetsel")
+.addEventListener("change",function(){
 
-    const bereich =
-        document.getElementById("codeBereich");
-
-    const result =
-        document.getElementById("result");
-
-    result.innerHTML = "";
-
-    digit1.value = "";
-    digit2.value = "";
-    digit3.value = "";
+    document.getElementById("result").innerHTML="";
 
     if(this.value){
 
-        bereich.style.display = "block";
+        document.getElementById("codeSection")
+        .style.display="block";
 
-        setTimeout(() => {
-            digit1.focus();
-        },100);
+        d1.focus();
 
     }
     else{
 
-        bereich.style.display = "none";
+        document.getElementById("codeSection")
+        .style.display="none";
 
     }
 
 });
 
-const digits =
-    document.querySelectorAll(".digit");
-
-digits.forEach((input,index,inputs)=>{
+document.querySelectorAll(".digit")
+.forEach((input,index,array)=>{
 
     input.addEventListener("input",()=>{
 
-        input.value =
-            input.value.replace(/\D/g,'');
+        input.value=input.value.replace(/\D/g,"");
 
-        if(
-            input.value &&
-            index < inputs.length-1
-        ){
-            inputs[index+1].focus();
-        }
+        if(input.value && index<array.length-1){
 
-    });
+            array[index+1].focus();
 
-    input.addEventListener("keydown",(e)=>{
-
-        if(
-            e.key==="Backspace" &&
-            input.value === "" &&
-            index > 0
-        ){
-            inputs[index-1].focus();
         }
 
     });
@@ -349,71 +386,110 @@ digits.forEach((input,index,inputs)=>{
 
 function pruefen(){
 
-    const raetselNr =
-        document.getElementById("raetselAuswahl").value;
+    const r =
+        document.getElementById("raetsel").value;
 
     const code =
-        digit1.value +
-        digit2.value +
-        digit3.value;
+        d1.value+d2.value+d3.value;
 
     const result =
         document.getElementById("result");
 
-    if(!raetselNr){
+    if(code.length!==3){
 
-        result.innerHTML = `
-            <div class="error-card">
-                Bitte zuerst ein Rätsel auswählen.
-            </div>
-        `;
+        result.innerHTML=
+        '<div class="error">❌ Bitte drei Ziffern eingeben.</div>';
 
         return;
     }
 
-    if(code.length !== 3){
+    if(code!==codes[r]){
 
-        result.innerHTML = `
-            <div class="error-card">
-                Bitte einen vollständigen 3-stelligen Code eingeben.
-            </div>
-        `;
+        result.innerHTML=
+        '<div class="error">❌ Leider falsch. Versuche es erneut.</div>';
 
         return;
     }
 
-    if(code !== raetsel[raetselNr].code){
+    document.getElementById("fanfare")
+    .play()
+    .catch(()=>{});
 
-        result.innerHTML = `
-            <div class="error-card">
-                ❌ Der Zahlencode ist leider nicht korrekt.
-            </div>
-        `;
+    confetti();
 
-        return;
-    }
-
-    const fanfare =
-        document.getElementById("fanfare");
-
-    fanfare.currentTime = 0;
-
-    fanfare.play().catch(() => {});
-
-    result.innerHTML = `
-        <div class="success-card">
-
-            <div class="success-title">
-                🎺 🏆 Erfolg! 🏆 🎺
-            </div>
-
-            <div>
-                ${raetsel[raetselNr].erfolg}
-            </div>
-
-        </div>
+    result.innerHTML=
+    `
+    <div class="success">
+        <h2>🎺 🏆 Erfolg! 🏆 🎺</h2>
+        <p>
+            Herzlichen Glückwunsch!
+            Der Zahlencode wurde akzeptiert.
+        </p>
+    </div>
     `;
 }
+
+function confetti(){
+
+    for(let i=0;i<120;i++){
+
+        const conf=document.createElement("div");
+
+        conf.innerHTML="🎉";
+
+        conf.style.position="fixed";
+        conf.style.left=Math.random()*100+"vw";
+        conf.style.top="-20px";
+        conf.style.fontSize=20+Math.random()*20+"px";
+        conf.style.pointerEvents="none";
+        conf.style.zIndex="9999";
+
+        document.body.appendChild(conf);
+
+        const duration=
+        2000+Math.random()*2000;
+
+        conf.animate([
+            {transform:"translateY(0) rotate(0deg)"},
+            {transform:`translateY(110vh) rotate(${720*Math.random()}deg)`}
+        ],{
+            duration:duration
+        });
+
+        setTimeout(()=>conf.remove(),duration);
+    }
+}
+
+function createSnow(){
+
+    const snow =
+        document.getElementById("snow");
+
+    for(let i=0;i<50;i++){
+
+        const flake =
+            document.createElement("div");
+
+        flake.className=
+            "snowflake";
+
+        flake.innerHTML="❄";
+
+        flake.style.left=
+            Math.random()*100+"vw";
+
+        flake.style.fontSize=
+            (10+Math.random()*20)+"px";
+
+        flake.style.animationDuration=
+            (5+Math.random()*10)+"s";
+
+        snow.appendChild(flake);
+
+    }
+}
+
+createSnow();
 
 </script>
 
