@@ -30,7 +30,7 @@ body{
 
 .container{
     width:100%;
-    max-width:600px;
+    max-width:650px;
 
     background:rgba(255,255,255,0.06);
 
@@ -39,6 +39,7 @@ body{
     backdrop-filter:blur(8px);
 
     border-radius:25px;
+
     padding:40px;
 
     text-align:center;
@@ -49,21 +50,53 @@ body{
 }
 
 h1{
-    margin-bottom:10px;
     color:#ffd700;
+    margin-bottom:10px;
 }
 
 .subtitle{
-    color:#d0d0d0;
     margin-bottom:30px;
+    color:#d6d6d6;
+}
+
+.label{
+    display:block;
+    margin-bottom:12px;
+    font-weight:bold;
+}
+
+select{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+
+    background:#1f1f1f;
+    color:white;
+
+    font-size:1rem;
+}
+
+select:focus{
+    outline:none;
+    box-shadow:
+        0 0 0 3px #ffd700;
+}
+
+#codeBereich{
+    display:none;
+    margin-top:30px;
+}
+
+.code-title{
+    margin-bottom:20px;
 }
 
 .code-container{
     display:flex;
     justify-content:center;
     gap:12px;
-
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 .digit{
@@ -73,13 +106,13 @@ h1{
     border:none;
     border-radius:15px;
 
-    text-align:center;
-
-    font-size:2.2rem;
-    font-weight:bold;
-
     background:#1f1f1f;
+
     color:#ffd700;
+
+    font-size:2rem;
+    font-weight:bold;
+    text-align:center;
 }
 
 .digit:focus{
@@ -90,7 +123,8 @@ h1{
         0 0 20px rgba(255,215,0,.5);
 }
 
-#checkValue{
+button{
+
     width:100%;
 
     padding:15px;
@@ -98,18 +132,19 @@ h1{
     border:none;
     border-radius:15px;
 
-    background:#1f1f1f;
-    color:white;
-
     font-size:1rem;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    background:#ffd700;
+    color:black;
+
+    transition:0.2s;
 }
 
-#checkValue:focus{
-    outline:none;
-
-    box-shadow:
-        0 0 0 3px #ffd700,
-        0 0 20px rgba(255,215,0,.5);
+button:hover{
+    transform:translateY(-2px);
 }
 
 #result{
@@ -119,47 +154,28 @@ h1{
 .success-card{
 
     background:#123018;
-    border:2px solid #22aa44;
-
-    color:#d2ffd2;
+    border:2px solid #32b552;
 
     border-radius:15px;
 
-    padding:20px;
-
-    animation: pop .4s;
+    padding:25px;
+    color:#d8ffd8;
 }
 
 .error-card{
 
     background:#401515;
-    border:2px solid #aa3333;
-
-    color:#ffd2d2;
+    border:2px solid #cf4d4d;
 
     border-radius:15px;
 
-    padding:20px;
+    padding:25px;
 
-    animation: pop .4s;
-}
-
-@keyframes pop{
-
-    from{
-        transform:scale(.8);
-        opacity:0;
-    }
-
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-
+    color:#ffd2d2;
 }
 
 .success-title{
-    font-size:1.5rem;
+    font-size:1.6rem;
     margin-bottom:10px;
 }
 
@@ -172,75 +188,131 @@ h1{
     <h1>🎄 Weihnachtsrätsel 2026</h1>
 
     <div class="subtitle">
-        Gib den dreistelligen Code und den Prüfwert ein.
+        Löse die Rätsel und überprüfe deinen Zahlencode.
     </div>
 
-    <div class="code-container">
+    <label class="label">
+        Um welches Rätsel handelt es sich?
+    </label>
 
-        <input
-            id="digit1"
-            class="digit"
-            maxlength="1"
-            inputmode="numeric">
+    <select id="raetselAuswahl">
 
-        <input
-            id="digit2"
-            class="digit"
-            maxlength="1"
-            inputmode="numeric">
+        <option value="">
+            -- Bitte auswählen --
+        </option>
 
-        <input
-            id="digit3"
-            class="digit"
-            maxlength="1"
-            inputmode="numeric">
+        <option value="1">
+            Rätsel 1 - Der Postversand
+        </option>
+
+        <option value="2">
+            Rätsel 2 - Die Bauanleitung
+        </option>
+
+        <option value="3">
+            Rätsel 3 - Die Sternenbilder
+        </option>
+
+    </select>
+
+    <div id="codeBereich">
+
+        <h3 class="code-title">
+            Trage hier deinen Zahlencode ein
+        </h3>
+
+        <div class="code-container">
+
+            <input
+                id="digit1"
+                class="digit"
+                maxlength="1"
+                inputmode="numeric">
+
+            <input
+                id="digit2"
+                class="digit"
+                maxlength="1"
+                inputmode="numeric">
+
+            <input
+                id="digit3"
+                class="digit"
+                maxlength="1"
+                inputmode="numeric">
+
+        </div>
+
+        <button onclick="pruefen()">
+            Überprüfen
+        </button>
 
     </div>
-
-    <input
-        id="checkValue"
-        type="text"
-        placeholder="Prüfwert">
 
     <div id="result"></div>
 
 </div>
 
-<!-- FANFARE -->
-<audio id="fanfare">
-    <!-- sounds/fanfare.mp3 -->
+<audio id="fanfare" preload="auto">
+    <source src="sounds/fanfare.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-/*
---------------------------------
-RÄTSEL
---------------------------------
-*/
-
 const raetsel = {
 
-    "123": {
-        pruefwert: "ABC",
+    "1": {
+        code: "429",
         erfolg:
-            "🎉 Platzhalter für Rätsel 1"
+        "🎉 Herzlichen Glückwunsch! Rätsel 1 wurde erfolgreich gelöst."
     },
 
-    "456": {
-        pruefwert: "DEF",
+    "2": {
+        code: "923",
         erfolg:
-            "🎉 Platzhalter für Rätsel 2"
+        "🎉 Herzlichen Glückwunsch! Rätsel 2 wurde erfolgreich gelöst."
+    },
+
+    "3": {
+        code: "108",
+        erfolg:
+        "🎉 Herzlichen Glückwunsch! Rätsel 3 wurde erfolgreich gelöst."
     }
 
 };
 
+document
+.getElementById("raetselAuswahl")
+.addEventListener("change", function(){
 
-/*
---------------------------------
-AUTOMATISCHER CURSOR
---------------------------------
-*/
+    const bereich =
+        document.getElementById("codeBereich");
+
+    const result =
+        document.getElementById("result");
+
+    result.innerHTML = "";
+
+    digit1.value = "";
+    digit2.value = "";
+    digit3.value = "";
+
+    if(this.value){
+
+        bereich.style.display = "block";
+
+        setTimeout(() => {
+            digit1.focus();
+        },100);
+
+    }
+    else{
+
+        bereich.style.display = "none";
+
+    }
+
+});
 
 const digits =
     document.querySelectorAll(".digit");
@@ -259,15 +331,14 @@ digits.forEach((input,index,inputs)=>{
             inputs[index+1].focus();
         }
 
-        pruefungVersuchen();
     });
 
     input.addEventListener("keydown",(e)=>{
 
         if(
             e.key==="Backspace" &&
-            input.value==="" &&
-            index>0
+            input.value === "" &&
+            index > 0
         ){
             inputs[index-1].focus();
         }
@@ -276,112 +347,68 @@ digits.forEach((input,index,inputs)=>{
 
 });
 
-/*
---------------------------------
-PRÜFWERT
---------------------------------
-*/
-
-document
-.getElementById("checkValue")
-.addEventListener("input",pruefungVersuchen);
-
-
-/*
---------------------------------
-AUTOMATISCHE PRÜFUNG
---------------------------------
-*/
-
-function pruefungVersuchen(){
-
-    const code =
-        digit1.value +
-        digit2.value +
-        digit3.value;
-
-    const pruefwert =
-        checkValue.value.trim();
-
-    if(
-        code.length === 3 &&
-        pruefwert.length > 0
-    ){
-        pruefen();
-    }
-
-}
-
-
-/*
---------------------------------
-VALIDIERUNG
---------------------------------
-*/
-
-let letzterErfolg = null;
-
 function pruefen(){
 
+    const raetselNr =
+        document.getElementById("raetselAuswahl").value;
+
     const code =
         digit1.value +
         digit2.value +
         digit3.value;
-
-    const pruefwert =
-        checkValue.value
-            .trim()
-            .toUpperCase();
 
     const result =
         document.getElementById("result");
 
-    if(!(code in raetsel)){
+    if(!raetselNr){
 
         result.innerHTML = `
             <div class="error-card">
-                ❌ Unbekannter Code
+                Bitte zuerst ein Rätsel auswählen.
             </div>
         `;
 
         return;
     }
 
-    if(
-        raetsel[code].pruefwert
-        .toUpperCase() !== pruefwert
-    ){
+    if(code.length !== 3){
 
         result.innerHTML = `
             <div class="error-card">
-                ❌ Prüfwert stimmt nicht.
+                Bitte einen vollständigen 3-stelligen Code eingeben.
             </div>
         `;
 
         return;
     }
 
-    if(letzterErfolg !== code){
+    if(code !== raetsel[raetselNr].code){
 
-        letzterErfolg = code;
+        result.innerHTML = `
+            <div class="error-card">
+                ❌ Der Zahlencode ist leider nicht korrekt.
+            </div>
+        `;
 
-        /*
-        FANFARE
-        document
-            .getElementById("fanfare")
-            .play();
-        */
+        return;
     }
+
+    const fanfare =
+        document.getElementById("fanfare");
+
+    fanfare.currentTime = 0;
+
+    fanfare.play().catch(() => {});
 
     result.innerHTML = `
         <div class="success-card">
 
             <div class="success-title">
-                🏆 Erfolg!
+                🎺 🏆 Erfolg! 🏆 🎺
             </div>
 
             <div>
-                ${raetsel[code].erfolg}
+                ${raetsel[raetselNr].erfolg}
             </div>
 
         </div>
