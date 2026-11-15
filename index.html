@@ -574,13 +574,17 @@ function confetti(){
         const conf=document.createElement("div");
 
         const symbole = [
-    "🎁",
-    "⭐",
-    "🍪",
-    "🕯️",
+            "🎁",
+            "⭐",
+            "🍪",
+            "🕯️",
             "🎄"
-];
-
+        ];
+        conf.innerHTML =
+            symbole[
+                Math.floor(Math.random() * symbole.length)
+            ];
+        
         conf.style.position="fixed";
         conf.style.left=Math.random()*100+"vw";
         conf.style.top="-20px";
