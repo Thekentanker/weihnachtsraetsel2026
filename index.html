@@ -125,6 +125,21 @@ body{
 
     transform:translateX(-50%);
 }
+.candle::after{
+    content:"";
+
+    position:absolute;
+
+    width:7px;
+    height:28px;
+
+    background:#d46a6a;
+
+    right:-2px;
+    top:35px;
+
+    border-radius:0 0 8px 8px;
+}
 .flame{
 
     position:absolute;
@@ -311,30 +326,11 @@ button:hover{
     }
 }
 
-.cookie{
-    position:fixed;
-    font-size:2rem;
-    opacity:.7;
-}
-
-.cookie.left{
-    left:15px;
-    bottom:15px;
-}
-
-.cookie.right{
-    right:15px;
-    bottom:15px;
-}
-
 </style>
 </head>
 <body>
 
 <div id="snow"></div>
-
-<div class="cookie left">🍪</div>
-<div class="cookie right">🍪</div>
 
 <div class="header">
 
