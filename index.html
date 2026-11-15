@@ -33,7 +33,14 @@ body{
     color:white;
     overflow-x:hidden;
 }
-
+clip-path: polygon(
+    50% 0%,
+    80% 30%,
+    100% 70%,
+    50% 100%,
+    0% 70%,
+    20% 30%
+);
 .snowflake{
     position:fixed;
     top:-10px;
@@ -130,7 +137,7 @@ body{
     position:absolute;
 
     left:50%;
-    top:-30px;
+    top:-26px;
 
     width:14px;
     height:22px;
@@ -146,8 +153,8 @@ body{
         );
 
     border-radius:
-        50% 50% 50% 50% /
-        20% 20% 80% 80%;
+        50% 50% 60% 60% /
+        5% 5% 95% 95%;
 
     box-shadow:
         0 0 12px gold,
