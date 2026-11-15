@@ -362,7 +362,7 @@ button:hover{
 </div>
 
 <audio id="fanfare">
-    <source src="fanfare.mp3" type="audio/mpeg">
+    <source src="sounds/fanfare.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -487,7 +487,14 @@ function pruefen(){
 
    if(code !== raetsel[r].code){
 
-    result.innerHTML =
+document.getElementById("fail")
+    .currentTime = 0;
+
+document.getElementById("fail")
+    .play()
+    .catch(() => {});
+
+result.innerHTML =
     `
     <div class="error">
         
