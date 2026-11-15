@@ -326,6 +326,21 @@ button:hover{
             Überprüfen
         </button>
 
+        <button onclick="zeigeHinweis()">
+    💡 Hinweise
+        </button>
+        
+        <div id="hinweisbereich" style="display:none; margin-top:20px;">
+            <div id="hinweistext"></div>
+        
+            <button
+                id="weiterHinweis"
+                onclick="naechsterHinweis()"
+                style="margin-top:10px;">
+                Nächster Hinweis
+            </button>
+        </div>
+
     </div>
 
     <div id="result"></div>
@@ -345,7 +360,12 @@ const raetsel = {
         richtig_titel: "Glückwunsch. Ihr seid bereit neue Rätsel zu bestreiten",
         richtig_text: "Nehmt euch Umschlag Nummer 2.",
         fehler_titel: "Falsch",
-        fehler_text: "Stimmt nicht"
+        fehler_text: "Stimmt nicht",
+        hinweise: [
+            "Hinweis 1",
+            "Hinweis 2",
+            "Hinweis 3"
+        ]
     },
 
     2 : {
@@ -353,7 +373,12 @@ const raetsel = {
         richtig_titel: "📮 Der Postversand",
         richtig_text: "Sehr gut! Ihr habt die richtige Versandroute entdeckt.",
         fehler_titel: "Falsch",
-        fehler_text: "Stimmt nicht"
+        fehler_text: "Stimmt nicht",
+        hinweise: [
+            "Hinweis 1",
+            "Hinweis 2",
+            "Hinweis 3"
+        ]
     },
 
     3 : {
@@ -361,7 +386,12 @@ const raetsel = {
         richtig_titel: "🛠️ Die Bauanleitung",
         richtig_titel: "Perfekt! Die Bauanleitung wurde erfolgreich entschlüsselt.",
         fehler_titel: "Falsch",
-        fehler_text: "Stimmt nicht"
+        fehler_text: "Stimmt nicht",
+        hinweise: [
+            "Hinweis 1",
+            "Hinweis 2",
+            "Hinweis 3"
+        ]
     },
 
     4 : {
@@ -369,13 +399,21 @@ const raetsel = {
         titel: "⭐ Die Sternenbilder",
         text: "Hervorragend! Die Sterne haben euch den richtigen Weg gezeigt.",
         fehler_text: "Falsch",
-        fehler_text: "Stimmt nicht"
+        fehler_text: "Stimmt nicht",
+        hinweise: [
+            "Hinweis 1",
+            "Hinweis 2",
+            "Hinweis 3"
+        ]
     }
 
 };
 document.getElementById("raetsel")
 .addEventListener("change",function(){
+aktuellerHinweis = 0;
 
+document.getElementById("hinweisbereich")
+    .style.display = "none";
     document.getElementById("result").innerHTML="";
 
     if(this.value){
@@ -411,6 +449,8 @@ document.querySelectorAll(".digit")
     });
 
 });
+
+let aktuellerHinweis = 0;
 
 function pruefen(){
 
@@ -496,6 +536,65 @@ function confetti(){
         });
 
         setTimeout(()=>conf.remove(),duration);
+    }
+}
+
+function zeigeHinweis(){
+
+    const r =
+        document.getElementById("raetsel").value;
+
+    if(!r){
+        return;
+    }
+
+    aktuellerHinweis = 0;
+
+    document.getElementById("hinweisbereich")
+        .style.display = "block";
+
+    document.getElementById("hinweistext")
+        .innerHTML =
+        raetsel[r].hinweise[aktuellerHinweis];
+
+    pruefeHinweisButton();
+}
+
+function naechsterHinweis(){
+
+    const r =
+        document.getElementById("raetsel").value;
+
+    if(
+        aktuellerHinweis <
+        raetsel[r].hinweise.length - 1
+    ){
+        aktuellerHinweis++;
+    }
+
+    document.getElementById("hinweistext")
+        .innerHTML =
+        raetsel[r].hinweise[aktuellerHinweis];
+
+    pruefeHinweisButton();
+}
+
+function pruefeHinweisButton(){
+
+    const r =
+        document.getElementById("raetsel").value;
+
+    const button =
+        document.getElementById("weiterHinweis");
+
+    if(
+        aktuellerHinweis >=
+        raetsel[r].hinweise.length - 1
+    ){
+        button.style.display = "none";
+    }
+    else{
+        button.style.display = "block";
     }
 }
 
