@@ -190,6 +190,16 @@ button:hover{
     background:#ffea7a;
 
 }
+.buttonRow{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.buttonRow button{
+    flex:1;
+    margin:0;
+}
 
 #result{
 
@@ -322,13 +332,17 @@ button:hover{
             <input id="d3" class="digit" maxlength="1" inputmode="numeric">
         </div>
 
-        <button onclick="pruefen()">
-            Überprüfen
-        </button>
+     <div class="buttonRow">
 
-        <button onclick="zeigeHinweis()">
-    💡 Hinweise
-        </button>
+    <button onclick="pruefen()">
+        ✅ Überprüfen
+    </button>
+
+    <button onclick="zeigeHinweis()">
+        💡 Hinweise
+    </button>
+
+    </div>
         
         <div id="hinweisbereich" style="display:none; margin-top:20px;">
             <div id="hinweistext"></div>
@@ -396,9 +410,9 @@ const raetsel = {
 
     4 : {
         code: "108",
-        titel: "⭐ Die Sternenbilder",
-        text: "Hervorragend! Die Sterne haben euch den richtigen Weg gezeigt.",
-        fehler_text: "Falsch",
+        richtig_titel: "⭐ Die Sternenbilder",
+        richtig_text: "Hervorragend! Die Sterne haben euch den richtigen Weg gezeigt.",
+        fehler_titel: "Falsch",
         fehler_text: "Stimmt nicht",
         hinweise: [
             "Hinweis 1",
