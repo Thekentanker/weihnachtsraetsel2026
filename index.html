@@ -75,30 +75,72 @@ body{
 }
 
 .candle{
-    width:30px;
+    width:36px;
     height:120px;
-    background:#a40000;
-    border-radius:6px;
+
+    background: linear-gradient(
+        to right,
+        #7d0000,
+        #d10000 20%,
+        #ff4040 50%,
+        #d10000 80%,
+        #7d0000
+    );
+
+    border-radius:8px;
     position:relative;
-}
-
-.flame{
-    position:absolute;
-    width:18px;
-    height:30px;
-    left:6px;
-    top:-28px;
-
-    background:gold;
-    border-radius:50% 50% 50% 50%;
 
     box-shadow:
-        0 0 20px gold,
-        0 0 40px orange;
-
-    animation:flicker .4s infinite alternate;
+        inset -4px 0 8px rgba(0,0,0,.25),
+        inset 4px 0 8px rgba(255,255,255,.15),
+        0 4px 12px rgba(0,0,0,.3);
 }
+.candle::before{
+    content:"";
 
+    position:absolute;
+
+    width:3px;
+    height:12px;
+
+    background:#222;
+
+    top:-10px;
+    left:50%;
+
+    transform:translateX(-50%);
+}
+.flame{
+    position:absolute;
+
+    width:20px;
+    height:34px;
+
+    left:50%;
+    top:-42px;
+
+    transform:translateX(-50%);
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #fff8d4 0%,
+            #ffd500 40%,
+            #ff9900 80%,
+            transparent 100%
+        );
+
+    border-radius:
+        50% 50% 50% 50% /
+        30% 30% 70% 70%;
+
+    box-shadow:
+        0 0 15px #ffd700,
+        0 0 30px orange,
+        0 0 60px gold;
+
+    animation:flicker .6s ease-in-out infinite alternate;
+}
 @keyframes flicker{
 
     from{
