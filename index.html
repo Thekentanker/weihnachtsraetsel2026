@@ -338,14 +338,33 @@ button:hover{
 
 <script>
 
-const codes = {
-    1 : "000",
-    2 : "429",
-    3 : "923",
-    4 : "108"
+const raetsel = {
+
+    1 : {
+        code: "000",
+        titel: "🎅 Das Rätsel beginnt",
+        text: "Willkommen zum Weihnachtsrätsel 2026! Der erste Schritt ist geschafft."
+    },
+
+    2 : {
+        code: "429",
+        titel: "📮 Der Postversand",
+        text: "Sehr gut! Ihr habt die richtige Versandroute entdeckt."
+    },
+
+    3 : {
+        code: "923",
+        titel: "🛠️ Die Bauanleitung",
+        text: "Perfekt! Die Bauanleitung wurde erfolgreich entschlüsselt."
+    },
+
+    4 : {
+        code: "108",
+        titel: "⭐ Die Sternenbilder",
+        text: "Hervorragend! Die Sterne haben euch den richtigen Weg gezeigt."
+    }
 
 };
-
 document.getElementById("raetsel")
 .addEventListener("change",function(){
 
@@ -404,13 +423,13 @@ function pruefen(){
         return;
     }
 
-    if(code!==codes[r]){
+    if(code!==raetsel[r].code){
 
-        result.innerHTML=
+    result.innerHTML=
         '<div class="error">❌ Leider falsch. Versuche es erneut.</div>';
 
-        return;
-    }
+    return;
+}
 
     document.getElementById("fanfare")
     .play()
@@ -421,15 +440,25 @@ function pruefen(){
     result.innerHTML=
     `
     <div class="success">
-        <h2>🎺 🏆 Erfolg! 🏆 🎺</h2>
-        <p>
-            Herzlichen Glückwunsch!
-            Der Zahlencode wurde akzeptiert.
+    
+        <h2>${raetsel[r].titel}</h2>
+    
+        <p style="margin-top:15px;">
+            ${raetsel[r].text}
         </p>
+    
     </div>
     `;
 }
 
+
+5 : {
+    code: "317",
+    titel: "🎄 Der Weihnachtsbaum",
+    text: "Großartig! Ihr habt den Weihnachtsbaum geschmückt.",
+    bild: "weihnachtsbaum.jpg",
+    hinweis: "Schaut nun unter den Adventskranz."
+}
 function confetti(){
 
     for(let i=0;i<120;i++){
