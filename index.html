@@ -375,7 +375,7 @@ const raetsel = {
 
     1 : {
         code: "000",
-        richtig_titel: "Glückwunsch. Ihr seid bereit neue Rätsel zu bestreiten",
+        richtig_titel: "Krächtz, kracks, rödel, rödel. Ihr scheint eine erfolgreiche Leitung zu euren Auftraggebern aufgebaut haben. Glückwunsch!",
         richtig_text: `
             <p>"Und was nun?", fragt einer aus eurer Gruppe.</p>
             <p>
@@ -448,7 +448,15 @@ document.getElementById("hinweisbereich")
     d3.value = "";
 
     if(this.value){
-
+       const hinweisButton =
+        document.querySelector('button[onclick="zeigeHinweis()"]');
+        
+        if(raetsel[this.value].hinweise){
+            hinweisButton.style.display = "block";
+        }
+        else{
+            hinweisButton.style.display = "none";
+        } 
         document.getElementById("codeSection")
         .style.display="block";
 
