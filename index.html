@@ -342,26 +342,34 @@ const raetsel = {
 
     1 : {
         code: "000",
-        titel: "🎅 Das Rätsel beginnt",
-        text: "Willkommen zum Weihnachtsrätsel 2026! Der erste Schritt ist geschafft."
+        richtig_titel: "Glückwunsch. Ihr seid bereit neue Rätsel zu bestreiten",
+        richtig_text: "Nehmt euch Umschlag Nummer 2."
+        fehler_text: "Falsch"
+        fehler_text: "Stimmt nicht"
     },
 
     2 : {
         code: "429",
-        titel: "📮 Der Postversand",
-        text: "Sehr gut! Ihr habt die richtige Versandroute entdeckt."
+        richtig_titel: "📮 Der Postversand",
+        richtig_text: "Sehr gut! Ihr habt die richtige Versandroute entdeckt."
+        fehler_text: "Falsch"
+        fehler_text: "Stimmt nicht"
     },
 
     3 : {
         code: "923",
-        titel: "🛠️ Die Bauanleitung",
-        text: "Perfekt! Die Bauanleitung wurde erfolgreich entschlüsselt."
+        richtig_titel: "🛠️ Die Bauanleitung",
+        richtig_text: "Perfekt! Die Bauanleitung wurde erfolgreich entschlüsselt."
+        fehler_text: "Falsch"
+        fehler_text: "Stimmt nicht"
     },
 
     4 : {
         code: "108",
         titel: "⭐ Die Sternenbilder",
         text: "Hervorragend! Die Sterne haben euch den richtigen Weg gezeigt."
+        fehler_text: "Falsch"
+        fehler_text: "Stimmt nicht"
     }
 
 };
@@ -423,10 +431,19 @@ function pruefen(){
         return;
     }
 
-    if(code!==raetsel[r].code){
+   if(code !== raetsel[r].code){
 
-    result.innerHTML=
-        '<div class="error">❌ Leider falsch. Versuche es erneut.</div>';
+    result.innerHTML =
+    `
+    <div class="error">
+        
+        <h2>${raetsel[r].fehler_titel}</h2>
+    
+        <p style="margin-top:15px;">
+            ${raetsel[r].fehler_text}
+        </p>
+    </div>
+    `;
 
     return;
 }
@@ -441,10 +458,10 @@ function pruefen(){
     `
     <div class="success">
     
-        <h2>${raetsel[r].titel}</h2>
+        <h2>${raetsel[r].richtig_titel}</h2>
     
         <p style="margin-top:15px;">
-            ${raetsel[r].text}
+            ${raetsel[r].richtig_text}
         </p>
     
     </div>
