@@ -43,12 +43,14 @@ body{
     pointer-events:none;
 }
 
-@keyframes snow{
+@keyframes flicker{
+
     from{
-        transform:translateY(-20px);
+        transform:translateX(-50%) scale(1);
     }
+
     to{
-        transform:translateY(110vh);
+        transform:translateX(-50%) scale(1.1);
     }
 }
 
@@ -75,25 +77,28 @@ body{
 }
 
 .candle{
-    width:36px;
+    width:32px;
     height:120px;
 
-    background: linear-gradient(
-        to right,
-        #7d0000,
-        #d10000 20%,
-        #ff4040 50%,
-        #d10000 80%,
-        #7d0000
-    );
+    background:#b52a2a;
 
-    border-radius:8px;
+    border-radius:4px;
+
     position:relative;
 
     box-shadow:
-        inset -4px 0 8px rgba(0,0,0,.25),
-        inset 4px 0 8px rgba(255,255,255,.15),
-        0 4px 12px rgba(0,0,0,.3);
+        0 3px 8px rgba(0,0,0,.25);
+}
+.candle1{
+    height:105px;
+}
+
+.candle2{
+    height:130px;
+}
+
+.candle3{
+    height:115px;
 }
 .candle::before{
     content:"";
@@ -111,37 +116,28 @@ body{
     transform:translateX(-50%);
 }
 .flame{
+
     position:absolute;
 
-    width:20px;
-    height:34px;
-
     left:50%;
-    top:-42px;
+    top:-28px;
+
+    width:14px;
+    height:22px;
 
     transform:translateX(-50%);
 
     background:
         radial-gradient(
             ellipse at center,
-            #fff8d4 0%,
-            #ffd500 40%,
-            #ff9900 80%,
-            transparent 100%
+            #fffce5 0%,
+            #ffd700 45%,
+            #ff8a00 100%
         );
 
     border-radius:
         50% 50% 50% 50% /
-        30% 30% 70% 70%;
-
-    box-shadow:
-        0 0 15px #ffd700,
-        0 0 30px orange,
-        0 0 60px gold;
-
-    animation:flicker .6s ease-in-out infinite alternate;
-}
-@keyframes flicker{
+        20% 20% 80% 80%;@keyframes flicker{
 
     from{
         transform:scale(1);
@@ -328,15 +324,15 @@ button:hover{
 
     <div class="advent">
 
-        <div class="candle">
+        <div class="candle candle1">
             <div class="flame"></div>
         </div>
 
-        <div class="candle">
+        <div class="candle candle2">
             <div class="flame"></div>
         </div>
 
-        <div class="candle">
+        <div class="candle candle3">
             <div class="flame"></div>
         </div>
 
